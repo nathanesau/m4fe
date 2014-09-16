@@ -17,7 +17,7 @@ blackScholes(S, K, r, T, sigma)
 \item{sigma}{The volatility}
 }
 \description{
-The famous Black-Scholes Option Pricing Formula based on the Lognormal Models. This formula can be eKtended to barrier options, currency options, options on futures, etc.
+The famous Black-Scholes Option Pricing Formula based on the Lognormal Models. This formula can be extended to barrier options, currency options, options on futures, etc.
 }
 \details{
 The Black-Scholes Formula is based on the assumption of geometric brownian motion and can be shown to satisfy the Black-Scholes Partial Differential Equation. It can be thought of as the combination of an asset-or-nothing option and a cash-or-nothing option
