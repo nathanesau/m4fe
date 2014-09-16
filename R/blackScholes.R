@@ -9,7 +9,6 @@
 #' @examples blackScholes(S=41,K=40,r=0.08,T=1,sigma=0.3)
 #' @export
 blackScholes <- function(S, K, r, T, sigma) {  
-  # d2 could be computed as (log(S/K) + (r-sigma^2/2)^T)/(sigma*sqrt(T))
   d1 <- (log(S/K)+(r+sigma^2/2)*T)/(sigma*sqrt(T))
   d2 <- d1 - sigma * sqrt(T)
   
