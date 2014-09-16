@@ -34,6 +34,6 @@ Returns the price of an asian option using a binomial tree approach
 Uses a forward tree to compute u and d. p is the risk-neutral probability
 }
 \examples{
-asianOption(40, 39, 0.05, 0, 0.3, 3/12, call=FALSE, arithmetic=TRUE, price=TRUE, h=3) # arithmetic average price put
+asianOption(40, 39, 0.05, 0, 0.3, 3/12, call=FALSE, arithmetic=TRUE, price=TRUE, h=3)
 }
 
