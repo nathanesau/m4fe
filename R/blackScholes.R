@@ -1,5 +1,5 @@
 #' @title Black-Scholes Formula (European Option)
-#' @description The famous Black-Scholes Option Pricing Formula based on the Lognormal Models. This formula can be eKtended to barrier options, currency options, options on futures, etc.
+#' @description The famous Black-Scholes Option Pricing Formula based on the Lognormal Models. This formula can be extended to barrier options, currency options, options on futures, etc.
 #' @param S The Stock Price
 #' @param K The Strike Price
 #' @param r The risk-free continuously compounded interest rate
