@@ -95,7 +95,6 @@ bdt <- function(yields, volatilities) {
         for(l in 1:length(dFactors)) {
           product = product * (1+dFactors[l])^-1
         }
-        tree <<- product # comment this out
         total = total + product * (prob*(1 + R*exp(2*sigma*(sum(path)+node)))^-1)
       }
       total
