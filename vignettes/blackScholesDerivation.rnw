@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 %%%%%%%%%%%%%%%%%%%%%
 % Black Scholes Derivation
 % Nathan Esau <nesau@sfu.ca>
@@ -224,3 +225,231 @@ P =  K e^{-\alpha t}N(-d_2) - S_0 e^{- \delta t} N(-d_1)
 %\printindex
 %%%%%%%%%%%%%%%%%%%%%
 \end{document}
+=======
+%%%%%%%%%%%%%%%%%%%%%
+% Black Scholes Derivation
+% Nathan Esau <nesau@sfu.ca>
+%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%
+\documentclass{report}  
+\usepackage{amsmath}		
+\usepackage{amssymb}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{graphicx}
+\usepackage{imakeidx}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage{bookmark}
+\usepackage{xcolor}
+	
+	%\VignetteIndexEntry{Black Scholes Formula Derivation}
+	%\VignettePackage{actuar}
+
+\definecolor{light-gray}{gray}{1.00}
+% \highlight[<colour>]{<stuff>}
+\newcommand{\highlight}[2][light-gray]{\mathchoice%
+  {\colorbox{#1}{$\displaystyle#2$}}%
+  {\colorbox{#1}{$\textstyle#2$}}%
+  {\colorbox{#1}{$\scriptstyle#2$}}%
+  {\colorbox{#1}{$\scriptscriptstyle#2$}}}%
+
+%%%%%%%%%%%%%%%%%%%%%
+% Format
+%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\makeatother
+\makeindex
+\graphicspath{ {images/} }
+%\pagestyle{headings}
+\titleformat{\chapter}[hang]{\bf\huge}{\thechapter}{2pc}{}  
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+\hypersetup{colorlinks=true,linkcolor=blue}
+%\let\oldtextbf\textbf
+%\renewcommand{\textbf}[1]{\oldtextbf{#1}\index{#1}}
+\pdfbookmark{\contentsname}{Contents}
+%\tableofcontents
+\graphicspath{ {images/} }
+
+%%%%%%%%%%%%%%%%%%%%%
+% Functions
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bend}[1]{\smash{#1\!\!\!{\raisebox{-0.2em}{\big\urcorner}}}}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Title Page
+%%%%%%%%%%%%%%%%%%%%%
+\begin{document}\large{}
+\SweaveOpts{concordance=TRUE}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Derivation
+%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Deriving the Black-Scholes Formula}
+
+\section{Call Option}
+For a European call option, the potential cash-flows at time $t$ with occur if $S_t > K$
+
+\begin{enumerate}
+\item Receive a stock worth $S_t$ with probability Pr($S_t > K$)
+\item Pay $K$ with probability Pr($S_t > K$)
+\end{enumerate}
+
+\begin{align*}
+\highlight{\mbox{E(call payoff)}} &= \highlight{\mbox{Pr}(S_t > K) \mbox{ [}E(S_t \mbox{ $|$ } S_t > K) - K{]}} \\
+\highlight{\mbox{PV}\vspace{0mm}_0 {[}\mbox{E(call payoff)}{]}} &= \highlight{e^{-\alpha t} Pr(S_t > K) \mbox{ [}E(S_t \mbox{ $|$ } S_t > K) - K{]}} \\
+\end{align*}
+
+\section{Put Option}
+For a European put option, the potential cash-flows at time $t$ with occur if $S_t > K$
+
+\begin{enumerate}
+\item Receive $K$ with probability Pr($S_t < K$)
+\item Pay (buy a stock worth) $S_t$ with probability Pr($S_t < K$)
+\end{enumerate}
+
+\begin{align*}
+\highlight{\mbox{E(put payoff)}} &= \highlight{\mbox{Pr}(S_t < K) \mbox{ [}K - E(S_t \mbox{ $|$ } S_t < K){]}} \\
+\highlight{\mbox{PV}\vspace{0mm}_0 {[}\mbox{E(put payoff)}{]}} &= \highlight{e^{-\alpha t} Pr(S_t < K) \mbox{ [}K - E(S_t \mbox{ $|$ } S_t < K){]}} \\
+\end{align*}
+
+\section{Lognormal Model}
+
+In order to develop the Black-Scholes formula, we need to know the following quantities
+
+\begin{enumerate}
+\item Pr($S_t > K$) 
+\item E($S_t | S_t > K$)
+\end{enumerate}
+
+\vspace{3mm}
+Let $A$ be the normally distributed random variable for the stock return. \\
+
+\begin{center}
+$S_t = S_0 e^{At}$ where $A \sim \mbox{N}(\alpha, \sigma^2)$. \\
+$S_t/S_0 \sim LN(m = (\alpha - \delta - 1/2\sigma^2)t, v = \sigma\sqrt{t})$. 
+\end{center}
+
+\vspace{3mm}
+These parameters are chosen s.t. E($S_t/S_0$) = $e^{(\alpha - \delta)t}$ where $\alpha - \delta$ is the capital gains rate. \\
+We can see that this is true since E($S_t/S_0$) = $e^{m + 1/2v^2} = e^{(\alpha - \delta - 1/2\sigma^2)t + 1/2\sigma^2 t} = e^{(\alpha - \delta)t}$ 
+
+\vspace{3mm}
+For $t = 1$ the volatility of the stock return equals to the volatility of ln($S_t/S_0$)\\
+Otherwise, the volatility of ln($S_t/S_0$) must be adjusted for time, so $v = \sigma\sqrt{t}$
+
+\begin{align*}
+\Pr(S_t < K) &= \Pr(S_t/S_0 < K/S_0) \\
+ 			&= \Pr(\ln(S_t/S_0) < \ln(K/S_0)) \\ 
+\end{align*}
+
+\vspace{-3mm}
+Since ln($S_t/S_0$) $\sim$ Normal($m, v^2$), then $(\ln(S_t/S_0) - m)/v = Z \sim$ N(0, 1) where $Z$ is the standard normal random variable. Therefore, 
+
+\begin{align*}
+\highlight{\Pr(S_t < K)} 	&= \Pr(Z < \frac{\ln(K/S_0) - m}{v}) \\
+				&= \Pr(Z < - d_2)\\
+				&= \highlight{N(- d_2)}
+\end{align*}
+
+where $d_2 = \frac{\ln(S_0/K) + m}{v} = \frac{\ln(S_0/k) + (\alpha - \delta - 1/2\sigma^2)}{\sigma\sqrt{t}}$
+
+\vspace{3mm}
+Since $\Pr(S_t < K) = N(-d_2)$ then 
+
+\begin{equation*}
+\highlight{\Pr(S_t > K)} = \highlight{N(d_2)}
+\end{equation*}
+
+To find E($S_t |$ $S_t < K$) we use the following formula 
+
+\begin{equation*}
+\mbox{E}(S_t | \mbox{ } S_t < K) = \mbox{PE}(S_t | \mbox{ } S_t < K)/\Pr(S_t < K)
+\end{equation*}
+
+where PE is the partial expectation from $S_t = 0$ to $S_t = K$. Note that
+
+\begin{equation*}
+\mbox{PE}(S_t/S_0 | \mbox{ } S_t/S_0 < K/S_0) = \mbox{E}(S_t/S_0)N((\ln(K/S_0) - m - v^2)/v)
+\end{equation*}
+
+We can calculate PE($S_t | \mbox{ } S_t/S_0 < K/S_0$) = $S_0$ (PE($S_t/S_0 | \mbox{ } S_t/S_0 < K/S_0$)). This simplifies as follows
+
+\begin{align*}
+\mbox{PE}(S_t | \mbox{ } S_t < K) 	&= \mbox{PE}(S_t | \mbox{ } S_t/S_0 < K/S_0) \\
+									&= S_0 (\mbox{PE}(S_t/S_0 | \mbox{ } S_t/S_0 < K/S_0)) \\
+									&= S_0 \mbox{E}(S_t/S_0)N((\ln(K/S_0) - m - v^2)/v) \\
+									&= S_0 e^{m + 1/2v^2} N((\ln(K/S_0) - (\alpha - \delta - 1/2\sigma^2)t - \sigma^2 t)/(\sigma\sqrt{t})) \\
+									&= S_0 e^{(\alpha - \delta)t} N((\ln(K/S_0) - (\alpha - \delta + 1/2\sigma^2)t)/(\sigma\sqrt{t})) \\
+									&= S_0 e^{(\alpha - \delta)t} N(-d_1)
+\end{align*}
+
+where $d_1 = \frac{\ln(S_0/k) + (\alpha - \delta + 1/2\sigma^2)}{\sigma\sqrt{t}}$. Notice that $d_2 = d_1 - \sigma\sqrt{t}$
+
+\vspace{3mm}
+Since $\mbox{E}(S_t) = \mbox{PE}(S_t | \mbox{ } S_t > K) + \mbox{PE}(S_t | \mbox{ } S_t < K)$ then 
+
+\begin{align*}
+\mbox{PE}(S_t | \mbox{ } S_t > K) 	&= \mbox{E}(S_t) - \mbox{PE}(S_t | \mbox{ } S_t < K) \\
+									&= S_0 e^{(\alpha - \delta)t} - S_0 e^{(\alpha - \delta)t} N(-d_1) \\
+									&= S_0 e^{(\alpha - \delta)t} (1 - N(- d_1)) \\
+									&= S_0 e^{(\alpha - \delta)t} N(d_1)
+\end{align*}
+
+Which leads to the following formulas
+
+\vspace{-3mm}
+\begin{align*}
+\highlight{E(S_t | \mbox{ } S_t < K)}	&= \highlight{(S_0 e^{(\alpha - \delta)t} N(-d_1)) / N(-d_2)} \\
+\highlight{E(S_t | \mbox{ } S_t > K)} 	&= \highlight{(S_0 e^{(\alpha - \delta)t} N(d_1)) / N(d_2)} \\
+\end{align*}
+
+\vspace{-3mm}
+\section{The Black-Scholes Formula}
+
+Substituting in the formulas derived above, we find that for a European call option
+
+\begin{align*}
+\highlight{\mbox{E(call payoff)}} 	&= \mbox{Pr}(S_t > K) \mbox{ [}E(S_t \mbox{ $|$ } S_t > K) - K{]} \\
+									&= N(d_2)((S_0 e^{(\alpha - \delta)t} N(d_1)) / N(d_2) - K) \\
+									&= \highlight{S_0 e^{(\alpha - \delta)t} N(d_1) - K N(d_2)} \\
+\highlight{\mbox{PV}\vspace{0mm}_0 {[}\mbox{E(call payoff)}{]}} &= e^{-\alpha t} (S_0 e^{(\alpha - \delta)t} N(d_1) - K N(d_2)) \\
+																&= \highlight{S_0 e^{- \delta t} N(d_1) - K e^{-\alpha t} N(d_2)}
+\end{align*}
+
+So, for a European call option, 
+
+\begin{equation}
+C = S_0 e^{- \delta t} N(d_1) - K e^{-\alpha t} N(d_2)
+\end{equation}
+
+\vspace{3mm}
+Similarly, substituting in the formulas derived above, we find that, for a European put option
+
+\vspace{-3mm}
+\begin{align*}
+\highlight{\mbox{E(put payoff)}} 	&= \mbox{Pr}(S_t < K) \mbox{ [}K - E(S_t \mbox{ $|$ } S_t < K){]} \\
+									&= N(-d_2)(K - (S_0 e^{(\alpha - \delta)t} N(-d_1)) / N(-d_2)) \\
+									&= \highlight{K N(-d_2) - S_0 e^{(\alpha - \delta)t} N(-d_1)} \\
+\highlight{\mbox{PV}\vspace{0mm}_0 {[}\mbox{E(call payoff)}{]}} &= e^{-\alpha t} (K N(-d_2) - S_0 e^{(\alpha - \delta)t} N(-d_1)) \\
+&= \highlight{K e^{-\alpha t}N(-d_2) - S_0 e^{- \delta t} N(-d_1)}
+\end{align*}
+
+So, for a European put option, 
+
+\begin{equation}
+P =  K e^{-\alpha t}N(-d_2) - S_0 e^{- \delta t} N(-d_1)
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%
+% End
+%\printindex
+%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+>>>>>>> 7a83811598d915ec14910c06b8abc747a8494f97

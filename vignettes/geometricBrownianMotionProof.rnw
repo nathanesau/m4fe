@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 %%%%%%%%%%%%%%%%%%%%%
 % Assignment #_________
 % Nathan Esau <nesau@sfu.ca>
@@ -88,3 +89,95 @@ S(t)				&= S(0) e^{(\alpha - \delta - \frac{1}{2}\sigma^2)t + \sigma Z(t)}
 %\printindex
 %%%%%%%%%%%%%%%%%%%%%
 \end{document}
+=======
+%%%%%%%%%%%%%%%%%%%%%
+% Assignment #_________
+% Nathan Esau <nesau@sfu.ca>
+%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%
+\documentclass{report}	
+\usepackage{amsmath}		
+\usepackage{amssymb}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{graphicx}
+\usepackage{imakeidx}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage{bookmark}
+
+	%\VignetteIndexEntry{Geometric Brownian Motion (Lognormal Model) Proof}
+	%\VignettePackage{actuar}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Format
+%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\makeatother
+\makeindex
+\graphicspath{ {images/} }
+%\pagestyle{headings}
+%\titleformat{\chapter}[hang]{\bf\huge}{\thechapter}{2pc}{}  
+%\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+%\hypersetup{colorlinks=true,linkcolor=blue}
+%\let\oldtextbf\textbf
+%\renewcommand{\textbf}[1]{\oldtextbf{#1}\index{#1}}
+%\pdfbookmark{\contentsname}{Contents}
+%\tableofcontents
+\graphicspath{ {images/} }
+
+%%%%%%%%%%%%%%%%%%%%%
+% Functions
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bend}[1]{\smash{#1\!\!\!{\raisebox{-0.2em}{\big\urcorner}}}}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Start
+%%%%%%%%%%%%%%%%%%%%%
+\begin{document}\large{}
+
+\section*{Geometric Brownian Motion (Lognormal Model)}
+\begin{align*}
+dS(t) 	&= (\alpha - \delta)S(t)dt + \sigma S(t)dZ(t) \\
+dC(S,t) &= C_sds + \frac{1}{2}C_{ss}(ds)^2 + C_tdt \\
+		&= C_sds{[}(\alpha - \delta)dt + \frac{1}{2}C_{ss}{[}(\alpha - \delta)^2d_t^2 + 2(\alpha - \delta)\sigma dt dZ(t) + (S(t))^2\sigma^2dZ(t)^2{]} \\ &\mbox{\hspace{10mm}}+ \sigma dZ(t){]}S(t) + C_tdt \\ 
+		&= C_sds (\alpha - \delta)S(t) + \sigma S(t) dZ(t) C_s + \frac{1}{2}\sigma^2S(t)^2 + C_tdt\\
+		&= {[}(\alpha - \delta)S(t)C_s + \frac{1}{2}\sigma^2S^2C_{ss}{]}dt + \sigma S(t)C_{s}dZ(t) + C_tdt
+\end{align*}
+
+The first line follows by Ito's Lemma. \\The second line follows since 
+\begin{align*}
+dtdZ(t) 	&= dtY(t)\sqrt{dt} = dt^{3/2}Y(t) = 0 \\
+dt^2 		&= 0 \\
+dZ(t)^2 	&= (dt^{1/2}Y(t))^2 = dt(1) = dt
+\end{align*}
+
+Let $C(S,t) = \ln S(t)$. The partial derivatives can be computed as
+\begin{align*}
+C_s 	&= \frac{\partial{C}}{\partial{S}} = \frac{1}{S} \\
+C_{ss}	&= \frac{\partial^2{C}}{\partial{S}^2} = -\frac{1}{S^2} \\
+C_{t} 	&= \frac{\partial{C}}{\partial{t}} = 0
+\end{align*}
+
+We can plug these into our formula for $dC(S,t)$
+\begin{align*}
+dC(S,t) 	&= {[}(\alpha - \delta)S\frac{1}{S} + \frac{1}{2}\sigma^2S^2(-\frac{1}{S^2}){]}dt + \sigma S\frac{1}{S}dZ(t) + (0)dt \\
+dC(S,t)		&= (\alpha - \delta)dt + \sigma dZ - \frac{1}{2}\sigma^2 dt \\
+d\ln(S(t))	&= (\alpha - \delta - \frac{1}{2}\sigma^2)dt + \sigma dZ \\
+\int{d\ln{S(t)}}	&= \int (\alpha - \delta - \frac{1}{2}\sigma^2)dt + \int {\sigma dZ} \\
+\ln(S(t))-\ln(S(0)) &= (\alpha - \delta - \frac{1}{2}\sigma^2)\int dt + \sigma \int dz \\
+\ln(S(t))			&= \ln(S(0)) + (\alpha - \delta - \frac{1}{2}\sigma^2)t + \sigma Z(t) \\
+S(t)				&= S(0) e^{(\alpha - \delta - \frac{1}{2}\sigma^2)t + \sigma Z(t)}
+\end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%
+% End
+%\printindex
+%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+>>>>>>> 7a83811598d915ec14910c06b8abc747a8494f97

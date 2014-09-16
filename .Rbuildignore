@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 ^.*\.Rproj$
 ^\.Rproj\.user$
+=======
+^.*\.Rproj$
+^\.Rproj\.user$
+>>>>>>> 7a83811598d915ec14910c06b8abc747a8494f97

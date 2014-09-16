@@ -7,6 +7,10 @@ Description: Provides binomial tree models for European, American and Asian
     Options as well as Interest Rates. Monte Carlo Simulation and Methods for
     Solving Differential Equations are also included.
 Depends:
+<<<<<<< HEAD
     R (>= 3.1.0)
+=======
+    R (>= 3.1.1)
+>>>>>>> 7a83811598d915ec14910c06b8abc747a8494f97
 License: GPL-2
 LazyData: true
