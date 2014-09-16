@@ -1,0 +1,12 @@
+Package: m4fe
+Title: Models for Financial Economics
+Version: 0.1
+Author: Nathan Esau <nesau@sfu.ca>
+Maintainer: Nathan Esau <nesau@sfu.ca>
+Description: Provides binomial tree models for European, American and Asian
+    Options as well as Interest Rates. Monte Carlo Simulation and Methods for
+    Solving Differential Equations are also included.
+Depends:
+    R (>= 3.1.1)
+License: GPL-2
+LazyData: true
