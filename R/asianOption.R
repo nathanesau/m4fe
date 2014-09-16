@@ -41,7 +41,7 @@
 #' @param price TRUE if average price is used, FALSE if average strike is used
 #' @param h the number of subdivisions between 0 and t (default 10)
 #' @details Uses a forward tree to compute u and d. p is the risk-neutral probability
-#' @examples asianOption(40, 39, 0.05, 0, 0.3, 3/12, call=FALSE, arithmetic=TRUE, price=TRUE, h=3) # arithmetic average price put
+#' @examples asianOption(40, 39, 0.05, 0, 0.3, 3/12, call=FALSE, arithmetic=TRUE, price=TRUE, h=3)
 #' @export
 asianOption <- function(S, K, r, delta, sigma, t = 1, call=TRUE, arithmetic=TRUE, price=TRUE, h=10) {
   u = exp( (r-delta)*h + sigma*sqrt(h))

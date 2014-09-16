@@ -35,7 +35,6 @@ bdt <- function(yields, volatilities) {
       matrix(partials, nrow=i, ncol=j, byrow=TRUE)
     }
     
-    temp <<- fn
     for(i in 1:iterations) {
       x = x - solve(J(x))%*%f(x)
     }
